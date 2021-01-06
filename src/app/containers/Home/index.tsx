@@ -44,7 +44,11 @@ export const Home = memo((props: Props) => {
             item.name.toLowerCase().indexOf(home.searchText.toLowerCase()) >= 0,
         )
         .map(candidate => (
-          <CandidateCard key={candidate.id} {...{ candidate }}></CandidateCard>
+          <CandidateCard
+            showMeta={true}
+            key={candidate.id}
+            {...{ candidate }}
+          ></CandidateCard>
         ))}
     </CardsWrapper>
   );

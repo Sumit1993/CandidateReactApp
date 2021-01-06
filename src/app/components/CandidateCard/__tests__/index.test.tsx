@@ -7,6 +7,7 @@ describe('<CandidateCard  />', () => {
   it('should match snapshot', () => {
     const loadingIndicator = render(
       <CandidateCard
+        showMeta={true}
         candidate={{
           Image:
             'https://s3-ap-southeast-1.amazonaws.com/he-public-data/user14b9a23c.png',

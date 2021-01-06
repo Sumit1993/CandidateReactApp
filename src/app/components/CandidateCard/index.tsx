@@ -17,6 +17,7 @@ import { homeActions } from '../../../store/candidates/slice';
 
 interface Props {
   candidate: Candidate;
+  showMeta: boolean;
 }
 
 export function CandidateCard(props: Props) {
@@ -34,27 +35,31 @@ export function CandidateCard(props: Props) {
         <Img src={props.candidate.Image} />
       </CardImgContainer>
       <CardBody>{props.candidate.name}</CardBody>
-      <Meta>
-        <BtnContainer>
-          <ActionBtn
-            onClick={() => dispatch(homeActions.shortlist(props.candidate.id))}
-          >
-            Shortlist
-          </ActionBtn>
-          <ActionBtn
-            onClick={() => dispatch(homeActions.reject(props.candidate.id))}
-          >
-            Reject
-          </ActionBtn>
-        </BtnContainer>
-        <BtnContainer>
-          <ActionBtn
-            onClick={() => history.push(`/candidate/${props.candidate.id}`)}
-          >
-            View
-          </ActionBtn>
-        </BtnContainer>
-      </Meta>
+      {props.showMeta && (
+        <Meta>
+          <BtnContainer>
+            <ActionBtn
+              onClick={() =>
+                dispatch(homeActions.shortlist(props.candidate.id))
+              }
+            >
+              Shortlist
+            </ActionBtn>
+            <ActionBtn
+              onClick={() => dispatch(homeActions.reject(props.candidate.id))}
+            >
+              Reject
+            </ActionBtn>
+          </BtnContainer>
+          <BtnContainer>
+            <ActionBtn
+              onClick={() => history.push(`/candidate/${props.candidate.id}`)}
+            >
+              View
+            </ActionBtn>
+          </BtnContainer>
+        </Meta>
+      )}
     </CardContainer>
   );
 }

@@ -34,7 +34,11 @@ export function Rejected() {
             item.name.toLowerCase().indexOf(home.searchText.toLowerCase()) >= 0,
         )
         .map(candidate => (
-          <CandidateCard key={candidate.id} {...{ candidate }}></CandidateCard>
+          <CandidateCard
+            key={candidate.id}
+            showMeta={false}
+            {...{ candidate }}
+          ></CandidateCard>
         ))}
     </CardsWrapper>
   );
@@ -47,7 +51,7 @@ export function Rejected() {
       </Helmet>
       <NavBar></NavBar>
       <PageWrapper>
-        {home.shortlist.length > 0 ? getContent() : <NotRecordsFound />}
+        {home.rejected.length > 0 ? getContent() : <NotRecordsFound />}
       </PageWrapper>
     </>
   );
