@@ -20,7 +20,9 @@ export function NavBar() {
   return (
     <Nav>
       <NavHeader>
-        <NavLeft>Search Candidates...</NavLeft>
+        <NavLeft>
+          <h3>Search Candidates...</h3>
+        </NavLeft>
         <NavCenter>
           <Input
             type="text"
@@ -33,7 +35,7 @@ export function NavBar() {
           />
         </NavCenter>
         <NavRight onClick={() => setInput('')}>
-          <MenuLink to={'/'} label={'Home'}></MenuLink>
+          <MenuLink to={'/home'} label={'Home'}></MenuLink>
           <MenuLink to={'/shortlisted'} label={'Shortlisted'}></MenuLink>
           <MenuLink to={'/rejected'} label={'Rejected'}></MenuLink>
         </NavRight>

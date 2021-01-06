@@ -48,7 +48,9 @@ export function CandidateCard(props: Props) {
           </ActionBtn>
         </BtnContainer>
         <BtnContainer>
-          <ActionBtn onClick={() => history.push(props.candidate.id)}>
+          <ActionBtn
+            onClick={() => history.push(`/candidate/${props.candidate.id}`)}
+          >
             View
           </ActionBtn>
         </BtnContainer>

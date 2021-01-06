@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 interface Props {
@@ -11,7 +11,15 @@ export function MenuLink(props: Props) {
   const { to, label } = props;
   return (
     <MenuItem>
-      <Link to={to}>{label}</Link>
+      <NavLink
+        to={to}
+        activeStyle={{
+          fontWeight: 'bold',
+          color: 'red',
+        }}
+      >
+        {label}
+      </NavLink>
     </MenuItem>
   );
 }

@@ -18,6 +18,8 @@ import { messages } from './messages';
 import { homeActions } from '../../../store/candidates/slice';
 import { PageWrapper } from '../../components/PageWrapper';
 import { CandidateCard } from '../../components/CandidateCard';
+import { NavBar } from '../../components/NavBar';
+import { NotRecordsFound } from '../../components/NotRecordsFound/Loadable';
 
 interface Props {}
 
@@ -34,28 +36,28 @@ export const Home = memo((props: Props) => {
     if (home.candidates.length === 0) dispatch(homeActions.loadCandidates());
   }, []);
 
+  const getContent = () => (
+    <CardsWrapper>
+      {home.candidates
+        .filter(
+          item =>
+            item.name.toLowerCase().indexOf(home.searchText.toLowerCase()) >= 0,
+        )
+        .map(candidate => (
+          <CandidateCard key={candidate.id} {...{ candidate }}></CandidateCard>
+        ))}
+    </CardsWrapper>
+  );
+
   return (
     <>
       <Helmet>
         <title>Home</title>
         <meta name="description" content="Description of Home" />
       </Helmet>
+      <NavBar></NavBar>
       <PageWrapper>
-        <CardsWrapper>
-          {home.candidates
-            .filter(
-              item =>
-                item.name
-                  .toLowerCase()
-                  .indexOf(home.searchText.toLowerCase()) >= 0,
-            )
-            .map(candidate => (
-              <CandidateCard
-                key={candidate.id}
-                {...{ candidate }}
-              ></CandidateCard>
-            ))}
-        </CardsWrapper>
+        {home.candidates.length > 0 ? getContent() : <NotRecordsFound />}
       </PageWrapper>
     </>
   );

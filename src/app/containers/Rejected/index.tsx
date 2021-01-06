@@ -16,6 +16,8 @@ import { PageWrapper } from '../../components/PageWrapper';
 import { selectHome } from '../../../store/candidates/selectors';
 import { sliceKey, reducer } from '../../../store/candidates/slice';
 import { messages } from './messages';
+import { NavBar } from '../../components/NavBar';
+import { NotRecordsFound } from '../../components/NotRecordsFound/Loadable';
 
 export function Rejected() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -24,28 +26,28 @@ export function Rejected() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
+  const getContent = () => (
+    <CardsWrapper>
+      {home.rejected
+        .filter(
+          item =>
+            item.name.toLowerCase().indexOf(home.searchText.toLowerCase()) >= 0,
+        )
+        .map(candidate => (
+          <CandidateCard key={candidate.id} {...{ candidate }}></CandidateCard>
+        ))}
+    </CardsWrapper>
+  );
+
   return (
     <>
       <Helmet>
         <title>Rejected</title>
         <meta name="description" content="Description of Home" />
       </Helmet>
+      <NavBar></NavBar>
       <PageWrapper>
-        <CardsWrapper>
-          {home.rejected
-            .filter(
-              item =>
-                item.name
-                  .toLowerCase()
-                  .indexOf(home.searchText.toLowerCase()) >= 0,
-            )
-            .map(candidate => (
-              <CandidateCard
-                key={candidate.id}
-                {...{ candidate }}
-              ></CandidateCard>
-            ))}
-        </CardsWrapper>
+        {home.shortlist.length > 0 ? getContent() : <NotRecordsFound />}
       </PageWrapper>
     </>
   );
