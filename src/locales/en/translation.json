@@ -1,3 +1,6 @@
 {
-  "title": "welcome"
+  "title": "welcome",
+  "home": {
+    "title": "Search Candidates..."
+  }
 }
